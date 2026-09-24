@@ -1,0 +1,14 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "title":"UniversalPseudocodeIR","type":"object",
+ "required":["version","source_language","units","semantic_ir"],
+ "properties":{
+  "version":{"const":"0.2"},"source_language":{"type":"string"},"source_version":{"type":["string","null"]},
+  "units":{"type":"array","items":{"type":"object","required":["kind","pseudocode"],"properties":{"kind":{"type":"string"},"name":{"type":["string","null"]},"pseudocode":{"type":"string"},"semantic_annotations":{"type":"array","items":{"type":"object","required":["feature","status"],"properties":{"feature":{"type":"string"},"status":{"enum":["represented","annotated","ambiguous","unsupported"]},"detail":{"type":["string","null"]}},"additionalProperties":false}}},"additionalProperties":false}},
+  "semantic_ir":{"type":"object","required":["model","nodes","facets"],"properties":{
+   "model":{"const":"multi-paradigm"},"nodes":{"type":"array","items":{"type":"object","required":["id","kind"],"properties":{"id":{"type":"string"},"kind":{"type":"string"},"name":{"type":["string","null"]},"value":{},"source":{"type":["object","null"]}},"additionalProperties":true}},
+   "facets":{"type":"object","properties":{"memory":{"type":["object","null"]},"concurrency":{"type":["object","null"]},"effects":{"type":["object","null"]},"logic":{"type":["object","null"]},"hardware":{"type":["object","null"]},"proof":{"type":["object","null"]},"gpu":{"type":["object","null"]}},"additionalProperties":true}
+  },"additionalProperties":false},
+  "capabilities":{"type":"array","items":{"type":"string"}},"unresolved":{"type":"array","items":{"type":"string"}}
+ },"additionalProperties":false
+}

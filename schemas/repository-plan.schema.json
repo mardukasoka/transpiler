@@ -1,0 +1,27 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"RepositoryTranspilationPlan",
+  "type":"object",
+  "required":["schema_version","source","target","files","edges"],
+  "properties":{
+    "schema_version":{"const":"0.1"},
+    "source":{"type":"string"},
+    "target":{"type":"string"},
+    "files":{"type":"array","items":{"type":"object","required":["path","disposition"],"properties":{
+      "path":{"type":"string"},
+      "language":{"type":["string","null"]},
+      "disposition":{"enum":["translate","preserve","substitute","regenerate","vendor","unsupported"]},
+      "adapter":{"type":["string","null"]},
+      "reason":{"type":["string","null"]}
+    },"additionalProperties":false}},
+    "edges":{"type":"array","items":{"type":"object","required":["from","to","kind"],"properties":{
+      "from":{"type":"string"},"to":{"type":"string"},
+      "kind":{"enum":["imports","builds","loads","generates","links","runtime-api"]}
+    },"additionalProperties":false}},
+    "entrypoints":{"type":"array","items":{"type":"string"}},
+    "manifests":{"type":"array","items":{"type":"string"}},
+    "assets":{"type":"array","items":{"type":"string"}},
+    "invariants":{"type":"array","items":{"type":"string"}}
+  },
+  "additionalProperties":false
+}

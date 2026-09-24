@@ -1,0 +1,10 @@
+{
+  "schema_version":"0.1",
+  "source":"OpenSpace bounded component",
+  "target":"mobile-browser",
+  "strategy":"repository-graph-transformation",
+  "target_language":"javascript",
+  "rendering_targets":["Three.js/WebGL","WebGPU"],
+  "invariants":["coordinate-frame","object-identity","physical-scale","time-behaviour","provenance"],
+  "completion_levels":["planned","partial","buildable","test-passing","invariant-validated"]
+}

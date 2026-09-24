@@ -1,0 +1,28 @@
+name: MCP service tests
+on:
+  pull_request:
+    paths:
+      - 'mcp/**'
+      - 'schemas/**'
+      - 'benchmarks/**'
+      - '.github/workflows/mcp-service.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'mcp/**'
+      - 'schemas/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mcp
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: mcp/package.json
+      - run: npm install
+      - run: npm test

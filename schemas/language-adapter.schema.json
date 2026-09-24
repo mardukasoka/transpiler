@@ -1,0 +1,17 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "title":"UTLanguageAdapter",
+ "type":"object",
+ "required":["id","source_language","kind","capabilities"],
+ "properties":{
+  "id":{"type":"string"},
+  "source_language":{"type":"string"},
+  "dialects":{"type":"array","items":{"type":"string"}},
+  "kind":{"enum":["builtin","external-parser","external-compiler","semantic-oracle","generated","builtin-smoke"]},
+  "upstream":{"type":["string","null"]},
+  "license":{"type":["string","null"]},
+  "capabilities":{"type":"array","items":{"enum":["detect","parse","lift-to-pseudocode","normalize","lower-from-pseudocode","generate","dependency-extract","build-adapt","validate"]}},
+  "validation":{"type":"array","items":{"type":"string"}}
+ },
+ "additionalProperties":false
+}

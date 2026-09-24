@@ -1,0 +1,7 @@
+{
+ "schema_version":"0.1",
+ "target":"all-computer-languages",
+ "pivot":"universal-pseudocode-ir",
+ "capabilities":["detect","parse","lift-to-pseudocode","normalize","lower-from-pseudocode","generate","dependency-extract","build-adapt","validate"],
+ "rule":"A language is only universally supported when lift and lower paths declare semantic loss and validation evidence."
+}
