@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"TranspileRequest",
+  "type":"object",
+  "required":["schema_version","source","target","mode","invariants"],
+  "properties":{
+    "schema_version":{"const":"0.1"},
+    "source":{"type":"object","required":["kind","location"],"properties":{"kind":{"enum":["snippet","file","project"]},"location":{"type":"string"},"language":{"type":["string","null"]}}},
+    "target":{"type":"object","required":["runtime"],"properties":{"language":{"type":["string","null"]},"runtime":{"type":"string"},"format":{"type":["string","null"]}}},
+    "mode":{"enum":["inspect","plan","transpile","validate"]},
+    "adapter":{"type":["string","null"]},
+    "invariants":{"type":"array","items":{"type":"string"}},
+    "limits":{"type":"object","properties":{"max_files":{"type":"integer","minimum":1},"max_seconds":{"type":"integer","minimum":1},"network":{"type":"boolean"}}}
+  },
+  "additionalProperties":false
+}
