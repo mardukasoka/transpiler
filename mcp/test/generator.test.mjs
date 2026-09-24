@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { analyseRepository } from "../repository-pipeline.mjs";
-import { generateTargetWorkspace } from "../generator.mjs";
+import { generateTargetWorkspace, safeRelative } from "../generator.mjs";
 import { validateGeneratedWorkspace } from "../validation.mjs";
 
 const files=[
@@ -24,4 +24,10 @@ test("rejects path traversal in generated target",()=>{
  const bad=[{path:"../escape.txt",language:null,content:"x"}];
  const a=analyseRepository({source:"demo",target:"browser",targetLanguage:"javascript",files:bad});
  assert.throws(()=>generateTargetWorkspace(a,bad),/unsafe target path/);
+});
+
+test("rejects Windows and UNC absolute target paths",()=>{
+  for (const p of ["C:\\escape.txt","C:/escape.txt","\\\\server\\share\\escape.txt","//server/share/escape.txt"]) {
+    assert.throws(()=>safeRelative(p),/unsafe target path/);
+  }
 });
