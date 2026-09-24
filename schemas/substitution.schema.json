@@ -1,0 +1,13 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "title":"TargetSubstitution",
+ "type":"object",
+ "required":["source","rule","target","kind","confidence","status"],
+ "properties":{
+   "source":{"type":"string"},"rule":{"type":"string"},"target":{"type":"string"},
+   "kind":{"enum":["imports","builds","loads","generates","links","runtime-api"]},
+   "confidence":{"enum":["candidate","verified"]},
+   "status":{"enum":["proposed","accepted","rejected","validated"]}
+ },
+ "additionalProperties":false
+}
