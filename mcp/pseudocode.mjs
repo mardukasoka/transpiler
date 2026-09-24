@@ -1,4 +1,4 @@
-function ann(feature,status="represented",detail=null){return {feature,status,detail};}
+function ann(feature,status="represented",detail=null){return {feature,status,detail};}\n\nfunction semanticNodes(language,lines){\n const nodes=lines.map((line,i)=>{\n  let kind="opaque"; let name=null; let value=line;\n  if(line.startsWith("PROGRAM ")){kind="program";name=line.slice(8);}\n  else if(line.startsWith("OUTPUT ")){kind="output";value=line.slice(7);}\n  else if(line.startsWith("SET ")){kind="assignment";}\n  else if(line.startsWith("SECTION ")){kind="section";name=line.slice(8);}\n  return {id:`${language}:${i}`,kind,name,value,source:null};\n });\n return {model:"multi-paradigm",nodes,facets:{memory:null,concurrency:null,effects:null,logic:null,hardware:null,proof:null,gpu:null}};\n}
 
 export function liftFortran(source) {
   const units=[]; const unresolved=[];
@@ -15,7 +15,7 @@ export function liftFortran(source) {
     else {out.push(`SOURCE[Fortran]: ${s}`);unresolved.push(s);current.semantic_annotations.push(ann(s,"annotated","Requires fuller Fortran frontend"));}
   }
   current.pseudocode=out.join("\n"); units.push(current);
-  return {version:"0.1",source_language:"fortran",source_version:null,units,capabilities:["program","assignment","output"],unresolved};
+  return {version:"0.2",source_language:"fortran",source_version:null,units,semantic_ir:semanticNodes("fortran",out),capabilities:["program","assignment","output"],unresolved};
 }
 
 export function liftCobol(source) {
@@ -31,7 +31,7 @@ export function liftCobol(source) {
     else if(/^(IDENTIFICATION|ENVIRONMENT|DATA|PROCEDURE) DIVISION\.?$/i.test(s)){out.push(`SECTION ${s.replace(/\.$/,"")}`);}
     else {out.push(`SOURCE[COBOL]: ${s}`);unresolved.push(s);annotations.push(ann(s,"annotated","Requires full COBOL dialect frontend"));}
   }
-  return {version:"0.1",source_language:"cobol",source_version:null,units:[{kind:"program",name,pseudocode:out.join("\n"),semantic_annotations:annotations}],capabilities:["program","move","display","divisions"],unresolved};
+  return {version:"0.2",source_language:"cobol",source_version:null,units:[{kind:"program",name,pseudocode:out.join("\n"),semantic_annotations:annotations}],semantic_ir:semanticNodes("cobol",out),capabilities:["program","move","display","divisions"],unresolved};
 }
 
 export function liftToPseudocode(language,source){
