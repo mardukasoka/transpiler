@@ -71,7 +71,8 @@
         "inspect",
         "plan",
         "transpile",
-        "validate"
+        "validate",
+        "report"
       ]
     },
     "adapter": {
