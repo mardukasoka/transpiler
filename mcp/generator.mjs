@@ -1,9 +1,11 @@
 import path from "node:path";
 import { hash } from "./core.mjs";
 
-function safeRelative(p) {
-  const n=path.posix.normalize(String(p).replaceAll("\\","/")).replace(/^\/+/, "");
-  if (!n || n===".." || n.startsWith("../")) throw new Error("unsafe target path");
+export function safeRelative(p) {
+  const raw=String(p);
+  if (/^[a-zA-Z]:[\\/]/.test(raw) || /^[/\\]{2}/.test(raw) || path.isAbsolute(raw)) throw new Error("unsafe target path");
+  const n=path.posix.normalize(raw.replaceAll("\\","/"));
+  if (!n || n==="." || n===".." || n.startsWith("../") || n.startsWith("/")) throw new Error("unsafe target path");
   return n;
 }
 
