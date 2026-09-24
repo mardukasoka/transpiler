@@ -3,7 +3,7 @@ const EXT_LANG = new Map([
   [".c","c"],[".h","c"],[".cc","c++"],[".cpp","c++"],[".hpp","c++"],
   [".rs","rust"],[".go","go"],[".java","java"],[".kt","kotlin"],[".jl","julia"],
   [".lua","lua"],[".php","php"],[".rb","ruby"],[".cs","c#"],[".fs","f#"],
-  [".glsl","glsl"],[".vert","glsl"],[".frag","glsl"]
+  [".glsl","glsl"],[".vert","glsl"],[".frag","glsl"],[".swift","swift"],[".scala","scala"],[".hs","haskell"],[".erl","erlang"],[".ex","elixir"],[".exs","elixir"],[".dart","dart"],[".r","r"],[".m","objective-c"],[".mm","objective-c++"],[".zig","zig"],[".sol","solidity"],[".v","verilog"],[".vhd","vhdl"],[".vhdl","vhdl"],[".sql","sql"],[".pl","perl"],[".pm","perl"],[".lisp","common lisp"],[".clj","clojure"],[".rkt","racket"],[".ml","standard ml"],[".fsx","f#"]
 ]);
 
 export const DEFAULT_EXCLUDES = [
