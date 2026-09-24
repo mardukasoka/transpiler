@@ -7,8 +7,8 @@ import { translate } from "./adapters.mjs";
 const server = new McpServer({ name: "universal-transpiler", version: "0.1.0" });
 
 const requestShape = {
-  source: z.object({ kind: z.enum(["snippet","file","project"]), location: z.string(), language: z.string().nullable().optional(), content: z.string().optional() }),
-  target: z.object({ runtime: z.string(), language: z.string().nullable().optional(), format: z.string().nullable().optional() }),
+  source: z.object({ kind: z.enum(["snippet","file","project"]), location: z.string(), language: z.string().nullable().optional(), content: z.string().optional() }).strict(),
+  target: z.object({ runtime: z.string(), language: z.string().nullable().optional(), format: z.string().nullable().optional() }).strict(),
   adapter: z.string().nullable().optional(),
   invariants: z.array(z.string()).default([])
 };
