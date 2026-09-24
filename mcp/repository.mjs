@@ -30,5 +30,5 @@ export function buildRepositoryPlan({ source, target, paths = [], targetLanguage
   const files = paths.map(p => classifyPath(p, targetLanguage));
   const manifests = paths.filter(p => /(^|\/)(package\.json|pyproject\.toml|requirements\.txt|Cargo\.toml|go\.mod|CMakeLists\.txt|Makefile)$/.test(p));
   const entrypoints = paths.filter(p => /(^|\/)(index|main|app|server)\.(js|mjs|ts|py|c|cc|cpp|rs|go|java|jl)$/.test(p));
-  return { schema_version:"0.1", source, target, files, edges:[], entrypoints, manifests, assets:files.filter(f=>!f.language).map(f=>f.path), invariants };
+  return { schema_version:"0.1", source, target, files, edges:[], entrypoints, manifests, assets:files.filter(f=>f.disposition !== "vendor" && !f.language).map(f=>f.path), invariants };
 }

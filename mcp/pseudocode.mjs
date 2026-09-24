@@ -1,4 +1,16 @@
-function ann(feature,status="represented",detail=null){return {feature,status,detail};}\n\nfunction semanticNodes(language,lines){\n const nodes=lines.map((line,i)=>{\n  let kind="opaque"; let name=null; let value=line;\n  if(line.startsWith("PROGRAM ")){kind="program";name=line.slice(8);}\n  else if(line.startsWith("OUTPUT ")){kind="output";value=line.slice(7);}\n  else if(line.startsWith("SET ")){kind="assignment";}\n  else if(line.startsWith("SECTION ")){kind="section";name=line.slice(8);}\n  return {id:`${language}:${i}`,kind,name,value,source:null};\n });\n return {model:"multi-paradigm",nodes,facets:{memory:null,concurrency:null,effects:null,logic:null,hardware:null,proof:null,gpu:null}};\n}
+function ann(feature,status="represented",detail=null){return {feature,status,detail};}
+
+function semanticNodes(language,lines){
+ const nodes=lines.map((line,i)=>{
+  let kind="opaque"; let name=null; let value=line;
+  if(line.startsWith("PROGRAM ")){kind="program";name=line.slice(8);}
+  else if(line.startsWith("OUTPUT ")){kind="output";value=line.slice(7);}
+  else if(line.startsWith("SET ")){kind="assignment";}
+  else if(line.startsWith("SECTION ")){kind="section";name=line.slice(8);}
+  return {id:language+":"+i,kind,name,value,source:null};
+ });
+ return {model:"multi-paradigm",nodes,facets:{memory:null,concurrency:null,effects:null,logic:null,hardware:null,proof:null,gpu:null}};
+}
 
 export function liftFortran(source) {
   const units=[]; const unresolved=[];
