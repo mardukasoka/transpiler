@@ -1,12 +1,3 @@
-# program subs
-# implicit none
-r = Float64(0.0)
-name = ""
-name = "circle"
-r = area(2.0e0)
-println(name, r)
-show(3)
-
 function area(rad)
     # argument(s) rad :: Float64
     area::Float64 = Float64(0.0)
@@ -20,3 +11,17 @@ function show(n)
         println("k =", k)
     end
 end
+
+function main()
+    # program subs
+    # implicit none
+    r::Float64 = Float64(0.0)
+    name::String = ""
+    name = "circle"
+    r = area(2.0e0)
+    println(name, r)
+    show(3)
+
+end
+
+main()

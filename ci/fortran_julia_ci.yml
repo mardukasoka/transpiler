@@ -1,0 +1,24 @@
+# Note: GitHub Actions minutes are free for public repositories on GitHub Free/Pro plans; private repositories consume paid minutes after the monthly free allowance. Verify your account plan before relying on this CI.
+name: fortran-julia-ci
+on:
+  push:
+    branches: [feature/fortran-julia-baseline]
+  pull_request:
+    branches: [feature/fortran-julia-baseline]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: "1.10"
+      - name: Install gfortran
+        run: sudo apt-get update && sudo apt-get install -y gfortran
+      - name: Install Python deps
+        run: pip install pytest fparser
+      - name: Run pytest (snapshot + equivalence)
+        run: pytest -v -rs fortran_julia
